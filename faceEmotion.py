@@ -48,3 +48,8 @@ for face in faces:
     cv2.putText(
         image, predicted_label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2
     )
+
+cv2.imwrite("final_image.jpg", image)
+cv2.imshow("Detected faces and emotions", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
