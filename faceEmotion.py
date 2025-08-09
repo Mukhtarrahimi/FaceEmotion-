@@ -9,3 +9,5 @@ image = cv2.imread(image_path)
 
 detector = MTCNN()
 
+faces = detector.detect_faces(image)
+emotion_model = load_model(r"model_v6_23.hdf5" )
