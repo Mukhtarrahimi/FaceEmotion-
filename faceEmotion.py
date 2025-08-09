@@ -31,3 +31,20 @@ colors = [
     (0, 128, 0),
     (139, 0, 139),
 ]
+
+
+for face in faces:
+    color = choice(colors)
+    x, y, width, height = face["box"]
+    face_image = image[y : y + height, x : x + width]
+    face_image = cv2.resize(face_image, (48, 48))
+    face_image = cv2.cvtColor(face_image, cv2.COLOR_BGR2GRAY)
+    face_image = np.expand_dims(face_image, axis=0)
+    face_image = np.expand_dims(face_image, axis=-1)
+    predicted_class = np.argmax(emotion_model.predict(face_image))
+    label_map = dict((v, k) for k, v in emotion_labels.items())
+    predicted_label = label_map[predicted_class]
+    cv2.rectangle(image, (x, y), (x + width, y + height), color, 2)
+    cv2.putText(
+        image, predicted_label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2
+    )
