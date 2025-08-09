@@ -4,10 +4,14 @@ import numpy as np
 from keras.models import load_model
 from random import choice
 
-image_path = r"image1.jpg"
+image_path = r"C:\Users\Rahimi\Desktop\Programing\Python-Workspace\Complate project\faceEmotion\image1.jpg"
+
 image = cv2.imread(image_path)
 
 detector = MTCNN()
+image = cv2.imread(image_path)
+if image is None:
+    raise FileNotFoundError(f"Could not read the image at {image_path}")
 
 faces = detector.detect_faces(image)
 emotion_model = load_model(r"model_v6_23.hdf5" )
